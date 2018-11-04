@@ -63,7 +63,7 @@ This is meant to be executed with any other of the aforemention commands. So, if
 INSERT PIC HERE
 
 
-#### BONUS FEATURE
+### **BONUS FEATURE**
 
 You will notice that when you first run the app the first time, a new .txt files called log.txt will be created. This file will contain the comman line you recently ran in the terminal. Additionally, any commands you pass will be logged in this file and will the existing content will not be overwritten.
 
