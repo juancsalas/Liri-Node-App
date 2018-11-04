@@ -8,9 +8,9 @@ For this app to work correctly, you'll need to install the NPM modules, includin
 There are four various commands you can use in terminal to trigger the Liri Node App: `concert-this`, `spotify-this-song`, `movie-this`, and `do-what-it-says`.
 <br>
 
-#### `1. node liri.js concert-this <artist/band name>`
+##### `1. node liri.js concert-this <artist/band name>`
 
-This command will search the bandsintown API to search for the next concert if your band or artists. It will you provide you with the name of the arist or band you searched, the venue of their next concerts, the date of the concert, and the location of the venue.
+This command will search the bandsintown API to search for the next concert if your band or artists. It will you provide you with the name of the arist or band you searched, the **venue** of their next concert, the **date** of the concert, and the **location** of the venue.
 
 INSERT PIC HERE
 
@@ -23,7 +23,7 @@ And if you were ot forget to input and artist or band, you'll get a reponse stat
 INSERT PIC HERE
 <br>
 
-### `2. node liri.js movie-this <movie name>`
+#### `2. node liri.js movie-this <movie name>`
 
 This command uses the OMDB API to provide you with information on the movie you searched. The return information will provide you with:
 
@@ -42,10 +42,10 @@ If you don't submit a movie name when you enter the command, the results will de
 
 INSERT PIC HERE
 
-###   `3. node liri.js spotify-this-song <song name here>`
+#### `3. node liri.js spotify-this-song <song name here>`
 
-This command uses the Spotify API to provide information on the song you input. If there are multiple songs with the same title, it will chose the most recent song in order of release. You will be given the track name, album, and artist as well as a link to a sample, if applicable.
+This command uses the Spotify API to provide information on the song you input. If there are multiple songs with the same title, it will chose the most recent song in order of release. You will be given the **track name**, **album**, and **artist** as well as a **link** to a sample, if applicable.
 
 INSERT PIC HERE
 
-If no song is sumbitted, the results will default to "The Sign" by Ace of Base
+If no song is sumbitted, the results will default to *The Sign* by Ace of Base
