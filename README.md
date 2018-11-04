@@ -36,11 +36,11 @@ This command uses the OMDB API to provide you with information on the movie you 
 * IMDB Rating (If Applicable)
 * Rotten Tomatoes Rating (If Applicable)
 
-INSERT PIC HERE
+![movie-this-success](images/movie-this-success.png)
 
 If you don't submit a movie name when you enter the command, the results will default to the film Mr. Nobody.
 
-INSERT PIC HERE
+![movie-this-blank](images/movie-this-blank.png)
 
 #### `3. node liri.js spotify-this-song <song name here>`
 
