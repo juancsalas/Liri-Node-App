@@ -46,26 +46,26 @@ If you don't submit a movie name when you enter the command, the results will de
 
 This command uses the Spotify API to provide information on the song you input. If there are multiple songs with the same title, it will chose the most recent song in order of release. You will be given the **track name**, **album**, and **artist** as well as a **link** to a sample, if applicable.
 
-INSERT PIC HERE
+![spotify-this-song](images/spotify-success.png)
 
 If no song is sumbitted, the results will default to *The Sign* by Ace of Base
 
-INSERT PIC HERE
+![spotify-this-song](images/spotify-blank.png)
 
 #### `4. node liri.js do-what-it-says`
 
 This last command utilizes the `random.txt` file that is saved in this app. I will grab the string in the file, and use those commands to return the appropriate information. By default the file reads `spotify-this-song,I Want It That Way`. Therefore if you run this app with this code, it will return you the the track information, using the Spotify API, of the song *I Want It That Way*.
 
-INSERT PIC HERE
+![spotify-this-song](images/random original.png)
 
 This is meant to be executed with any other of the aforemention commands. So, if you were to change `spotify-this-song` to `movie-this`, and `I Want It That Way` to `Indiana Jones and the Last Crusade` and run the code, it will return information about the movie.
 
-INSERT PIC HERE
+![spotify-this-song](images/random movie.png)
 
 
 ### **BONUS FEATURE**
 
 You will notice that when you first run the app the first time, a new .txt files called log.txt will be created. This file will contain the comman line you recently ran in the terminal. Additionally, any commands you pass will be logged in this file and will the existing content will not be overwritten.
 
-INSERT PIC HERE
+![log.txt](images/log.png)
 
