@@ -1,10 +1,35 @@
 /usr/local/Cellar/node/10.7.0/bin/node
 /Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
 movie-this
+Star Wars
+
+/usr/local/Cellar/node/10.7.0/bin/node
+/Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
+do-what-it-says
+
+
+/usr/local/Cellar/node/10.7.0/bin/node
+/Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
+concert-this
+Jack Johnson
+
+/usr/local/Cellar/node/10.7.0/bin/node
+/Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
+movie-this
 Shawshank Redemption
 
 /usr/local/Cellar/node/10.7.0/bin/node
 /Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
 movie-this
 
+
+/usr/local/Cellar/node/10.7.0/bin/node
+/Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
+concert-this
+Soda Stereo
+
+/usr/local/Cellar/node/10.7.0/bin/node
+/Users/JuanCarlosSalas/Dropbox/Coding_Boot_Camp/Homework/Homework-10/Liri-Node-App/liri.js
+spotify-this-song
+My Shot
 
