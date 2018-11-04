@@ -2,13 +2,11 @@
 ## Juan Carlos Salas - Coding Bootcamp
 \
 \
-\
 This application is comprised of several APIs and node packages to provide you with specific information about films, concerts, and music. 
 
 For this app to work correctly, you'll need to install the NPM modules, including file-system, node-spotify-api and momentjs as well as getting your own [Spotify API ID.](https://developer.spotify.com/). 
 
 There are four various commands you can use in terminal to trigger the Liri Node App: `concert-this`, `spotify-this-song`, `movie-this`, and `do-what-it-says`.
-\
 \
 #### `node liri.js concert-this <artist/band name>`
 
