@@ -7,7 +7,7 @@ For this app to work correctly, you'll need to install the NPM modules, includin
 
 There are four various commands you can use in terminal to trigger the Liri Node App: `concert-this`, `spotify-this-song`, `movie-this`, and `do-what-it-says`.
 
-
+\
 #### `node liri.js concert-this <artist/band name>`
 
 This command will search the bandsintown API to search for the next concert if your band or artists. It will you provide you with the name of the arist or band you searched, the venue of their next concerts, the date of the concert, and the location of the venue.
