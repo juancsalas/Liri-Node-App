@@ -1,6 +1,5 @@
 # Liri-Node-App - Assignment 10
 ## Juan Carlos Salas - Coding Bootcamp
-
 \
 \
 \
@@ -24,13 +23,3 @@ INSERT PIC HERE
 And if you were ot forget to input and artist or band, you'll get a reponse stating the error.
 
 INSERT PIC HERE
-
-
-
-
-
-
-
-
-
-\
