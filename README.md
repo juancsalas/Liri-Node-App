@@ -1,5 +1,5 @@
-# Liri-Node-App - Assignment 10
-## Juan Carlos Salas - Coding Bootcamp
+# Liri-Node-App - Juan Carlos Salas
+## Coding Bootcamp - Asignment 10
 
 This application is comprised of several APIs and node packages to provide you with specific information about films, concerts, and music. 
 
