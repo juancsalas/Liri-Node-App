@@ -12,15 +12,15 @@ There are four various commands you can use in terminal to trigger the Liri Node
 
 This command will search the bandsintown API to search for the next concert if your band or artists. It will you provide you with the name of the arist or band you searched, the **venue** of their next concert, the **date** of the concert, and the **location** of the venue.
 
-INSERT PIC HERE
+![concert-this-success](images/concert-this-success.png)
 
 But if your artist or band doesn't have any upcoming concerts, you'll get a message saying so.
 
-INSERT PIC HERE
+![concert-this-fail](images/concert-this-fail.png)
 
 And if you were ot forget to input and artist or band, you'll get a reponse stating the error.
 
-INSERT PIC HERE
+![concert-this-blank](images/concert-this-blank.png)
 <br>
 
 #### `2. node liri.js movie-this <movie name>`
