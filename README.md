@@ -56,7 +56,7 @@ If no song is sumbitted, the results will default to *The Sign* by Ace of Base
 
 This last command utilizes the `random.txt` file that is saved in this app. I will grab the string in the file, and use those commands to return the appropriate information. By default the file reads `spotify-this-song,I Want It That Way`. Therefore if you run this app with this code, it will return you the the track information, using the Spotify API, of the song *I Want It That Way*.
 
-![spotify-this-song](images/random-original.png)
+![spotify-this-song](images/random-spotify.png)
 
 This is meant to be executed with any other of the aforemention commands. So, if you were to change `spotify-this-song` to `movie-this`, and `I Want It That Way` to `Indiana Jones and the Last Crusade` and run the code, it will return information about the movie.
 
