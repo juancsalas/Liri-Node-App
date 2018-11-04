@@ -1,3 +1,4 @@
+// Node requirements for functions and APIs
 require("dotenv").config();
 var fs = require("fs");
 var request = require("request");
@@ -5,37 +6,26 @@ var Spotify = require('node-spotify-api');
 var keys = require("./keys.js");
 var moment = require("moment")
 
-
-
-// Declares and initalizes the terminal command into variable input
+// Variables used in various functions
 var entry = process.argv;
-
-// Variable used to store URL for API links
 var queryUrl = "";
-
-// Stores the name of the movie users seach in OMDBapi
-var movieName = "";
-
-// Variable artist is used in the Bands in Town API queryURL
-// Variable aristInput is used to store the unprocess search of artist so it can be re-used
-var artist = "";
-var artistInput = ""
-
-var track = "";
-
+var searchNoSpace = "";
+var searchSpace = "";
 
 // If statements determing what function to call based on user input
 if (process.argv[2] === "movie-this") {
-    movie (entry)
+    query(entry)
+    movie(searchNoSpace)
     addEntry(entry)
-
 }
 else if (process.argv[2] === "concert-this"){
-    concert (entry)
+    query(entry)
+    concert(searchNoSpace, searchSpace)
     addEntry(entry)
 }
-else if(process.argv[2] === "spotify-this-song") {
-    spotify (entry)
+else if(process.argv[2] === "spotify-this-song"){ 
+    query(entry)
+    spotify(searchSpace)
     addEntry(entry)
 }
 
@@ -44,23 +34,29 @@ else if(process.argv[2] === "do-what-it-says") {
     addEntry(entry)
 }
 
+// Function is used to pass "input" and change it's formatiting
+function query (input) {
 
-// Function movieRequest uses OMDBapi to search for user request
-function movie (input) {
-
-    // For Loop replaces the spaces in multi-word searches with "+" to make one string
+    // For loop and if statements format the input into two various formats needed for different functions
+    // The one with the "+" is needed for function movie () and concert ()
+    // The one with the same the space is needed for concert () and spotify ()
     for (let i = 3; i < input.length; i++) {
 
         if (i > 3 && i < input.length) {
-            movieName = movieName + "+" + input[i];
+            searchNoSpace = searchNoSpace + "+" + input[i];
+            searchSpace = searchSpace  + " " + input[i]
         }
-    
         else {
-            movieName = movieName + input[i];
-        }
-    }
+            searchNoSpace = searchNoSpace + input[i];
+            searchSpace = searchSpace  + input[i]
 
-    // If statement with the condition checks whether user inputed a search parameter
+        }
+    } 
+}
+
+// Function movieRequest uses OMDBapi to search for user request
+function movie (movieName) {
+
     if (process.argv[3]) {
 
         queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
@@ -69,35 +65,33 @@ function movie (input) {
 
             if (!error && response.statusCode === 200) {
 
-            // Stories the movie title into variable to be used later
-            var movieTitle =  JSON.parse(body).Title
+                var title =  JSON.parse(body).Title;
+                var year = JSON.parse(body).Year;
+                var country = JSON.parse(body).Country;
+                var language = JSON.parse(body).Language;
+                var plot = JSON.parse(body).Plot
+                var actors = JSON.parse(body).Actors
 
-            // Console logs the movie title and year of release
-            console.log("Title: " + movieTitle);
-            console.log(movieTitle + " was released in " + JSON.parse(body).Year);
+                console.log("\n- Movie: " + title + "\n- Year of Release: " + year + "\n- Country of Production: " + country + "\n- Language: " + language + "\n- Cast: " + actors + "\n- Plot Summary: " + plot);
+                
+                // These two if statement check whether IMDB and Rotten Tomatoes rating exists becasue not all films have them
+                if (JSON.parse(body).Ratings[0]) {
 
-            // If statement checks whether movie has IMDB rating and console logs the rating, or a mesage that there is no IMDB rating
-            if (JSON.parse(body).Ratings[0]) {
-                console.log(JSON.parse(body).Ratings[0].Source + " rating: " + JSON.parse(body).Ratings[0].Value);
-            }
-            else{
-                console.log("There is no IMDB rating.")
-            }
+                    var imdb = JSON.parse(body).Ratings[0].Value
+                    console.log("- IMDB rating: " + imdb);
+                }
+                else{
+                    console.log("- There is no IMDB rating.")
+                }
             
-            // If statement checks whether movie has Rotten Tomatoes rating and console logs the rating, or a mesage that there is no Rotten Tomatoes rating    
-            if (JSON.parse(body).Ratings[1]) {
-            console.log(JSON.parse(body).Ratings[1].Source + " rating: " + JSON.parse(body).Ratings[1].Value);
-            }
-            else{
-                console.log("There is no Rotten Tomatoes rating.")
-            }
+                if (JSON.parse(body).Ratings[1]) {
 
-            // Console logs the movie country of production, movie's language, plot, and starring cast
-            console.log(movieTitle + " was produced in " + JSON.parse(body).Country);
-            console.log(movieTitle + " is in " + JSON.parse(body).Language);
-            console.log(movieTitle + " plot: " + JSON.parse(body).Plot);
-            console.log(movieTitle + " stars " + JSON.parse(body).Actors);
-
+                    var rotten = JSON.parse(body).Ratings[1].Value
+                    console.log("- Rotten Tomatoes rating: " + rotten + "\n");
+                }
+                else{
+                    console.log("- There is no Rotten Tomatoes rating.\n")
+                }
             }
         })
     }
@@ -110,18 +104,17 @@ function movie (input) {
 
             if (!error && response.statusCode === 200) {
 
-                // Stores the movie variable in title
-                var movieTitle =  JSON.parse(body).Title;
+                var title =  JSON.parse(body).Title;
+                var year = JSON.parse(body).Year;
+                var country = JSON.parse(body).Country;
+                var language = JSON.parse(body).Language;
+                var plot = JSON.parse(body).Plot
+                var actors = JSON.parse(body).Actors
+                var imdb = JSON.parse(body).Ratings[0].Value
+                var rotten = JSON.parse(body).Ratings[1].Value
 
-                // Console logs the movie's title, release year, IMDB and Rotten Tomatoes ratings, country of production, language, plot, and cast
-                console.log("Title: " + movieTitle);
-                console.log(movieTitle + " was released in " + JSON.parse(body).Year);
-                console.log(JSON.parse(body).Ratings[0].Source + " rating: " + JSON.parse(body).Ratings[0].Value);
-                console.log(JSON.parse(body).Ratings[1].Source + " rating: " + JSON.parse(body).Ratings[1].Value);
-                console.log(movieTitle + " was produced in " + JSON.parse(body).Country);
-                console.log(movieTitle + " is in " + JSON.parse(body).Language);
-                console.log(movieTitle + " plot: " + JSON.parse(body).Plot);
-                console.log(movieTitle + " stars " + JSON.parse(body).Actors);
+                console.log("\n- Movie: " + title + "\n- Year of Release: " + year + "\n- Country of Production: " + country + "\n- Language: " + language + "\n- Cast: " + actors + "\n- Plot Summary: " + plot + "\n- IMDB rating: " + imdb + "\n- Rotten Tomatoes rating: " + rotten + "\n");
+
             }
         })
     }
@@ -130,20 +123,7 @@ function movie (input) {
 }
 
 // Function uses Bands in Town API to search for concerts
-function concert (input) {
-    // For Loop replaces the spaces in multi-word searches with "+" to make one string
-    for (let i = 3; i < input.length; i++) {
-
-        if (i > 3 && i < input.length) {
-            artist = artist + "+" + input[i];
-            artistInput = artistInput + " " + input[i]
-        }
-    
-        else {
-            artist = artist + input[i];
-            artistInput = artistInput + input[i]
-        }
-    }
+function concert (artist, artistInput) {
 
     // If statement checks whether there is data in element process.argv[3]
     if (process.argv[3]) {
@@ -154,137 +134,156 @@ function concert (input) {
 
             if (!error && response.statusCode === 200) {
                   
-                // if condition checkes if there is content in variable body
+                // if condition checks if there is content in "body" so to display information
                 if (JSON.parse(body)[0]) {
-            
-                // Console logs the artists searched and the venue they will be performing next
-                console.log(artistInput + " will be performing next at " + JSON.parse(body)[0].venue.name)
+                    var venue = JSON.parse(body)[0].venue.name;
+                    var city = JSON.parse(body)[0].venue.city
+                    var country = JSON.parse(body)[0].venue.country
+                    var date = moment(JSON.parse(body)[0].datetime).format("l")
 
-                // Cleanup location output for international locations
-                // Console logs the city, region(state), and country of the performance
-                console.log(JSON.parse(body)[0].venue.city + ", " + JSON.parse(body)[0].venue.region + ", " + JSON.parse(body)[0].venue.country)
-                
-                // Learn to change time using moment.js to MM/DD/YY
-                // Date of the Event (use moment to format this as "MM/DD/YYYY")
-                // Console logs the date of the performance
-                var test = JSON.parse(body)[0].datetime
-
-                console.log(moment(JSON.parse(body)[0].datetime).format("l"))
-
+                    // I added this if statement because foreign venues don't always follow the city, state, country format.
+                    if (JSON.parse(body)[0].venue.region){
+                        var state = JSON.parse(body)[0].venue.region
+                        console.log("\n" + artistInput + " will be performing next at " + venue + " in " + city + ", " + state + ", " + country + " on " + date + "\n");
+                    }
+                    else{
+                        console.log("\n" + artistInput + " will be performing next at " + venue + " in " + city + ", " + country + " on " + date + "\n")
+                    }
                 }
 
                 // If there is not content in element 0 of the body object program will console log content below
                 else{
-                    console.log(artistInput + " has no concerts in the near future.")
+                    console.log("\n" + artistInput + " has no concerts in the near future.\n")
                 }
 
             }
         })
     }
     else{
-        console.log("You didn't input an artists...");
-        
+        // Displays message when nothing gets inputted after the concert-this command (i.e. node liri.js concert-this)
+        console.log("\nYou didn't input an artist...\n");
     }
 
     
 }
 
-function spotify (input) {
+// Searches Spotify API for track
+function spotify (track) {
 
-    for (let i = 3; i < input.length; i++) {
+    var spotify = new Spotify(keys.spotify);
 
-        if (i > 3 && i < input.length) {
-            track = track + " " + input[i];
-        }
-    
-        else {
-            track = track + input[i];
-        }
-    }
-        var spotify = new Spotify(keys.spotify);
-    
-        if (process.argv[3]){   
+    if (process.argv[3]){   
         spotify.search({ type: "track", query: track, limit: 1 }, function(err, data) {
             if (err) {
-            return console.log("Error occurred: " + err);
+                return console.log("Error occurred: " + err);
             }
-        
-        console.log(track)
-        console.log(data.tracks.items[0].album.artists[0].name); 
-        console.log(data.tracks.items[0].album.name); 
-        console.log(data.tracks.items[0].preview_url); 
-        
-        });
+            
+            var artist = data.tracks.items[0].album.artists[0].name; 
+            var album = data.tracks.items[0].album.name; 
+
+            console.log("\n'" + track + "' from the album " + album + " by " + artist)
+
+            // Checks for song preview because no all songs have them
+            if (data.tracks.items[0].preview_url){
+                var preview = data.tracks.items[0].preview_url;
+                console.log("Listen to a preview here: \n" + preview + "\n")
+            }
+            else {
+                console.log("Sorry, there is no song preview.\n");
+                
+            }
+        }); 
     }
+       
     else{
         spotify.request('https://api.spotify.com/v1/tracks/3DYVWvPh3kGwPasp7yjahc')
-        .then(function(data) {            
-            console.log("The Sign")
-            console.log(data.artists[0].name);; 
-            console.log(data.album.name);
-            console.log(data.preview_url);;     
+        .then(function(data) { 
+
+            var track = "The Sign"
+            var artist = data.artists[0].name;
+            var album = data.album.name;
+            var preview = data.preview_url;    
+
+            console.log("\n'" + track + "' from the album " + album + " by " + artist + "\nListen to a preview here: \n" + preview + "\n")
+
         })
     }
 }
 
-
+// Runs command "do-what-it-says" from random.txt file
 function random () {
 
-   fs.readFile("random.txt", "utf8", function(error, data) {
+    // Uses readFile to read content from random.txt
+    fs.readFile("random.txt", "utf8", function(error, data) {
 
         if (error) {
             return console.log(error);
         }  
 
+        // Turns string into array
         var dataArr = data.split(",");
 
+        // If statements check first index of variable
         if (dataArr[0] === "movie-this") {
 
-
+            // This code block cuts the last element from the process.argv array
+            // It appends dataArray one element at a time so it becomes it's own array
+            // Purpose is to have process.arg in a format where it can be pass to function movie with success
             process.argv.pop()
             process.argv.push(dataArr[0]);
             process.argv.push(dataArr[1]);
             
             var entry = process.argv
-            movie(entry)
+            query(entry)
+            movie(searchNoSpace)
         }
         else if (dataArr[0] === "concert-this") {
+
+            // Code block has same function as above
             process.argv.pop()
             process.argv.push(dataArr[0]);
             process.argv.push(dataArr[1]);
             
             var entry = process.argv
+            query(entry)
+            concert(searchNoSpace, searchSpace)
+            
 
-            concert(entry)
         }
         else if (dataArr[0] === "spotify-this-song") {
+
+            // Code block has same function as above
             process.argv.pop()
             process.argv.push(dataArr[0]);
             process.argv.push(dataArr[1]);
             
             var entry = process.argv
-
-            spotify(entry)
+            query(entry)
+            spotify(searchSpace)
         }
         else{
+
+            // If there is an error with dataArr[0], message is displayed
             console.log("Error");
             
         }
     })
 }
 
-// ===== Use the shorthand methods we learn in class to rewrite the appending of the inputs into the files ======
-
+// addEntry function passes the variable entry into it to display process.argv in the log.txt file neatly
 function addEntry(input) {
-
     
+    // Process happpens in two parts:
+    // "action" is the first two elemnts of input and joins them into a string with "\n"
     var action = input.slice(0, 3)
     action = action.join("\n")
     
+    // "Entry" contains the rest of the string (in this case movie, song, or artist) and joins them into a string with a space
+    // Purpose is to keep it as one line
     var entry = input.slice(3)
-    var entry = entry.join(" ")
+    entry = entry.join(" ")
 
-    
+    // Both "action" and "entry" are pushed into the log.txt file
     fs.appendFile("log.txt", action + "\n", function(err) {
 
         if (err) {
@@ -300,13 +299,7 @@ function addEntry(input) {
         }
 
     })
-
-
 }
-
-
-
-
 
 
 
