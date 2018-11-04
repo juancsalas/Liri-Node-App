@@ -49,3 +49,23 @@ This command uses the Spotify API to provide information on the song you input. 
 INSERT PIC HERE
 
 If no song is sumbitted, the results will default to *The Sign* by Ace of Base
+
+INSERT PIC HERE
+
+#### `4. node liri.js do-what-it-says`
+
+This last command utilizes the `random.txt` file that is saved in this app. I will grab the string in the file, and use those commands to return the appropriate information. By default the file reads `spotify-this-song,I Want It That Way`. Therefore if you run this app with this code, it will return you the the track information, using the Spotify API, of the song *I Want It That Way*.
+
+INSERT PIC HERE
+
+This is meant to be executed with any other of the aforemention commands. So, if you were to change `spotify-this-song` to `movie-this`, and `I Want It That Way` to `Indiana Jones and the Last Crusade` and run the code, it will return information about the movie.
+
+INSERT PIC HERE
+
+
+#### BONUS FEATURE
+
+You will notice that when you first run the app the first time, a new .txt files called log.txt will be created. This file will contain the comman line you recently ran in the terminal. Additionally, any commands you pass will be logged in this file and will the existing content will not be overwritten.
+
+INSERT PIC HERE
+
